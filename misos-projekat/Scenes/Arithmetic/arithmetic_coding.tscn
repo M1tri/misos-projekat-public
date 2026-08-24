@@ -89,6 +89,9 @@ border_width_right = 8
 border_width_bottom = 8
 border_color = Color(0.4, 0.25882354, 0.15686275, 1)
 corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6mlg"]
 bg_color = Color(0.15294118, 0.29803923, 0.2627451, 1)

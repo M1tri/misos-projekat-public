@@ -147,7 +147,7 @@ func show_coding():
 	notebook.clear_text()
 	
 	notebook.display_text(
-		"Prvi karakter ulaznog niza je " + p + ", pa se početna sekvenca P postavlja na [color=red]" + p + "[/color] .",
+		"Prvi karakter ulaznog niza je [color=red]" + p + "[/color], pa se početna sekvenca P postavlja na [color=red]" + p + "[/color].",
 		2.0
 	)
 	

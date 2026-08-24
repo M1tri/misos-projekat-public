@@ -213,6 +213,7 @@ script = ExtResource("6_b66tm")
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 63.0
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8

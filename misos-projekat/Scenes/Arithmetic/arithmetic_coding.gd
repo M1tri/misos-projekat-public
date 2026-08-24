@@ -90,7 +90,7 @@ func start_input_analysis():
 	
 	await notebook.displayed_text
 	
-	var button_begin : Button = notebook.add_button("Zapocni brojanje")
+	var button_begin : Button = notebook.add_button("Započni brojanje")
 	await button_begin.pressed
 	
 	input_pos = 0
@@ -125,7 +125,7 @@ func finish_input_analysis():
 	
 	await notebook.displayed_text
 	
-	var button : Button = notebook.add_button("Odredi verovatnoce")
+	var button : Button = notebook.add_button("Odredi verovatnoće")
 	
 	await button.pressed
 	
@@ -152,7 +152,7 @@ func finish_input_analysis():
 	symbolTable.change_symbol_counter_text(input_text[0], str(count[input_text[0]]).pad_decimals(2))
 	
 	notebook.clear_buttons()
-	button = notebook.add_button("Zavrsi racunanje verovatnoca")
+	button = notebook.add_button("Završi računanje verovatnoća")
 	
 	await button.pressed
 	symbolTable.set_column_name(2, "P(S)")
@@ -242,7 +242,7 @@ func next_code_step(number_line : ArithmeticNumberLine):
 		2.0
 	)
 	
-	var button : Button = notebook.add_button("Udji u podinterval za simbol " + curr)
+	var button : Button = notebook.add_button("Uđi u podinterval za simbol " + curr)
 	
 	await button.pressed
 	arithmeticCodingVisualizer.next_coding_step()
@@ -293,11 +293,11 @@ func show_decoding():
 	notebook.clear_buttons()
 	
 	var code_str : String = str(coded_message).pad_decimals(6)
-	var subinterval_str : String = "(0, 1)"
+	var subinterval_str : String = "[0, 1)"
 	
 	for i in range(input_text.length()):
 		notebook.display_text(
-			"Prvo delimo trenutni interval " + subinterval_str + " na podintervale, zatim tražimo kom podintervalu pripada" +
+			"Prvo delimo trenutni interval " + subinterval_str + " na podintervale, zatim tražimo kom podintervalu pripada " +
 			code_str,
 			2.0
 		)
@@ -306,7 +306,7 @@ func show_decoding():
 		
 		var subinterval : ArithmeticNumberLine.SymbolInterval = await arithmeticCodingVisualizer.mark_code()
 		
-		subinterval_str = "(" + str(subinterval.start_num).pad_decimals(6) + ", " + str(subinterval.end_num).pad_decimals(6) + ")"
+		subinterval_str = "[" + str(subinterval.start_num).pad_decimals(6) + ", " + str(subinterval.end_num).pad_decimals(6) + ")"
 		
 		notebook.clear_text()
 		notebook.clear_buttons()
