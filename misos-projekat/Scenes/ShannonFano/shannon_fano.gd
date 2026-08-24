@@ -100,7 +100,7 @@ func _on_start_button_pressed() -> void:
 
 func start_input_analysis():
 	notebook.display_text(
-		"Proces kodiranja Shannon-Fano algoritmom zasniva se na određivanju učestalosti simbola " +
+		"1) Proces kodiranja Shannon-Fano algoritmom zasniva se na određivanju učestalosti simbola " +
 		"u ulaznom nizu i njihovom postepenom razdvajanju u grupe. Pre samog formiranja koda " + 
 		"potrebno je odrediti koliko se puta svaki simbol pojavljuje",
 		2.0
@@ -122,7 +122,7 @@ func next_char():
 		notebook.clear_buttons()
 		
 		notebook.display_text(
-			"Nakon prebrojavanja, simboli se sortiraju prema " +
+			"2) Nakon prebrojavanja, simboli se sortiraju prema " +
 			"opadajućem broju pojavljivanja. Tako se najčešće zastupljeni simboli nalaze na početku liste, dok " + 
 			"se ređi simboli nalaze na njenom kraju",
 			2.0
@@ -140,7 +140,7 @@ func next_char():
 		notebook.clear_text()
 		
 		notebook.display_text(
-			"Sledeći korak predstavlja formiranje stabla. ",
+			"3) Sledeći korak predstavlja formiranje stabla. ",
 			1.0
 		)
 		
@@ -232,7 +232,7 @@ func show_tree():
 	notebook.clear_text()
 	
 	notebook.display_text(
-		"Na osnovu formiranog stabla mogu se odrediti kodne reči pojedinačnih simbola. Kod se " +
+		"4) Na osnovu formiranog stabla mogu se odrediti kodne reči pojedinačnih simbola. Kod se " +
 		"dobija praćenjem putanje od korena do lista i zapisivanjem vrednosti grana, pri čemu leva grana " + 
 		"predstavlja 0, a desna 1",
 		2.0
@@ -257,7 +257,7 @@ func show_tree():
 func show_coding():
 	notebook.clear_buttons()
 	notebook.display_text(
-		"Ove kodne reči se zatim koriste za predstavljanje simbola u procesu Shannon-Fano " +
+		"5) Ove kodne reči se zatim koriste za predstavljanje simbola u procesu Shannon-Fano " +
 		"kodiranja. Za dati ulazni niz, svaki simbol se zamenjuje odgovarajućom kodnom rečju. ",
 		2.0
 	)
@@ -319,13 +319,14 @@ func show_coding():
 	notebook.clear_text()
 	
 	notebook.display_text(
-		"U ovom radu usvojeno je pravilo da leva grana ima vrednost 0, a desna 1, " + 
+		"U ovoj aplikaciji usvojeno je pravilo da leva grana ima vrednost 0, a desna 1, " + 
 		"dok bi izbor leve grane kao 1, a desne kao 0 doveo do drugačijih kodnih reči, " +
 		"princip kodiranja i dekodiranja bi ostao isti. Bitno je da se izabrano " +
 		"pravilo dosledno primenjuje na celo stablo.",
 		2.0
 	)
 	
+	inputDisplay.reset_highlight()
 	notebook.add_button("Pređi na dekodiranje").pressed.connect(show_decoding)
 
 func show_decoding():
@@ -336,7 +337,7 @@ func show_decoding():
 	code_pos = 0
 	
 	notebook.display_text(
-		"Dekodiranje predstavlja obrnut proces u odnosu na kodiranje. Cilj dekodiranja je da se na " +
+		"6) Dekodiranje predstavlja obrnut proces u odnosu na kodiranje. Cilj dekodiranja je da se na " +
 		"osnovu binarnog niza i prethodno formiranog Shannon-Fano stabla ponovo dobije originalni niz " + 
 		"simbola. Za razliku od kodiranja, tokom dekodiranja nije potrebno ponovo određivati broj " +
 		"pojavljivanja simbola niti formirati stablo, već se koristi već postojeća struktura stabla.",
@@ -390,8 +391,8 @@ func show_decoding():
 			var symbol : String = curr_node.get_symbol()
 			
 			notebook.display_text(
-				"Dosli smo do lista koji odgovara simbolu " + symbol + " " +
-				"sada njega pisemo na izlaz i vracamo se na koren stabla",
+				"Došli smo do lista koji odgovara simbolu " + symbol + " " +
+				"sada njega pišemo na izlaz i vraćamo se na koren stabla",
 				2.0
 			)
 			

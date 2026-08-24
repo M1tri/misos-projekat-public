@@ -12,3 +12,4 @@ res://misos-projekat/Scenes/LZW/lzw_table_row.gd
 res://misos-projekat/Scenes/LZW/lzw_dictionary.gd
 res://misos-projekat/Scenes/Arithmetic/arithmetic_coding.tscn
 res://misos-projekat/Scenes/Arithmetic/arithmetic_number_line.gd
+res://misos-projekat/Scenes/LZW/lzw_step_table.gd

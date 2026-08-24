@@ -49,6 +49,8 @@ func _ready() -> void:
 		}
 	)
 	
+	notebook.set_font_size(24)
+	
 	start_button.disabled = true
 
 func input_changed(new_text : String):
@@ -165,7 +167,7 @@ func finish_input_analysis():
 		"3) Početni interval [0,1) deli se prema verovatnoćama simbola. " +
 		"Za svaki simbol izračunava dužina podintervala po formuli:\n" +
 		"(G−D)⋅P(s)\nG - gornja granica intervala\nD - donja granica intervala " + 
-		"Dodavanjem te dužine na trenutnu poziciju dobija se gornja granica podintervala. ",
+		"Dodavanjem te dužine na trenutnu donju granicu dobija se gornja granica podintervala. ",
 		2.0
 	)
 	
@@ -183,7 +185,7 @@ func finish_input_analysis():
 		
 		var msg : String = ""
 		msg += "Simbol " + str(cur) + ":\n"
-		msg += "Trenutna pozicija: " + str(prev) + "\n"
+		msg += "Trenutna donja granica: " + str(prev) + "\n"
 		msg += "(G - D) * P(" + cur + ") = (1 - 0) * " + str(count[cur]).pad_decimals(2) + " = " + str(count[cur]).pad_decimals(2) + "\n"
 		var new : float = prev + count[cur]
 		msg += str(prev).pad_decimals(2) + " + " + str(count[cur]).pad_decimals(2) + " = " + str(new).pad_decimals(2)
@@ -273,14 +275,14 @@ func begin_decoding():
 	await notebook.add_button("Dalje").pressed
 	
 	notebook.display_text(
-		"Proces dekodiranja može se posmatrati kao postepeno određivanje položaja kodne " +
-		"vrednosti unutar sve užih intervala. U svakom koraku kodna vrednost ostaje u okviru trenutnog " +
-		"intervala, dok se izborom odgovarajućeg podintervala određuje naredni simbol. Isti postupak se " + 
-		"ponavlja sve dok se ne dobiju svi simboli originalne poruke.",
+		"Proces dekodiranja se zasniva na postepenom određivanju simbola. " +
+		"U svakom koraku bira se odgovarajući podinterval u kome se nalazi kodna vrednost. " +
+		"Postupak se ponavlja sve dok se ne dobiju svi simboli originalne poruke.",
 		2.0
 	)
 	
 	notebook.clear_buttons()
+	inputDisplay.reset_highlight()
 	await notebook.add_button("Pokreni dekodiranje").pressed
 	
 	await arithmeticCodingVisualizer.beggin_decompression()

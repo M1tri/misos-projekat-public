@@ -406,10 +406,10 @@ offset_left = 3.0
 offset_top = -1.0
 offset_right = 1309.0
 offset_bottom = 67.0
-theme_override_constants/margin_left = 1200
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_left = 1202
+theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_bottom = 9
 
 [node name="Panel" type="Panel" parent="GUI/HBoxContainer/Visualization/Display/RichTextLabel/EraserPanel" unique_id=1243567592]
 layout_mode = 2
@@ -417,7 +417,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wim7o")
 
 [node name="Eraser" type="Sprite2D" parent="GUI/HBoxContainer/Visualization/Display/RichTextLabel" unique_id=1906579821]
 texture_filter = 1
-position = Vector2(1269, 37)
+position = Vector2(1269, 31)
 texture = ExtResource("9_551te")
 script = ExtResource("10_lusi1")
 

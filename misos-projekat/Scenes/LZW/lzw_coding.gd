@@ -74,7 +74,7 @@ func start_input_analysis():
 	notebook.clear_buttons()
 	
 	notebook.display_text(
-		"Kodiranje pomoću LZW algoritma započinje inicijalizacijom rečnika, koji na početku " +
+		"1) Kodiranje pomoću LZW algoritma započinje inicijalizacijom rečnika, koji na početku " +
 		"sadrži pojedinačne karaktere. U većini implementacija rečnik se inicijalizuje sa svih 255 " +
 		"ASCII karaktera, u ovom demonstrativnom programu smatramo da rečnik već sadrži sve pojedinačne " +
 		"karaktere koje korisnici mogu uneti u ulazni niz, sa svojim odgovarajućim ASCII kodom.",
@@ -116,7 +116,7 @@ func show_coding():
 	notebook.clear_text()
 	
 	notebook.display_text(
-		"Tokom kodiranja koriste se dve oznake. P predstavlja trenutno posmatrani podniz, dok C " +
+		"2) Tokom kodiranja koriste se dve oznake. P predstavlja trenutno posmatrani podniz, dok C " +
 		"predstavlja sledeći karakter iz ulaznog niza. Na početku se prvi karakter ulaznog niza postavlja u " +
 		"P. Zatim se uzima sledeći karakter i označava sa C. Posmatra se podniz formiran spajanjem P i C, " + 
 		"odnosno P + C. ",
@@ -237,6 +237,7 @@ func next_coding_step() -> bool:
 		
 		notebook.clear_text()
 		notebook.clear_buttons()
+		inputDisplay.reset_highlight()
 	
 	return finished
 
@@ -245,7 +246,7 @@ func start_decoding():
 	notebook.clear_text()
 	
 	notebook.display_text(
-		"Postupak LZW dekodiranja zasniva se na ponovnom formiranju rečnika koji je korišćen " +
+		"3) Postupak LZW dekodiranja zasniva se na ponovnom formiranju rečnika koji je korišćen " +
 		"tokom kodiranja. Rečnik formiran tokom kodiranja ne prenosi se zajedno sa kompresovanim " +
 		"nizom, već ga dekoder samostalno ponovo kreira tokom procesa dekompresije. ",
 		2.0
@@ -308,7 +309,7 @@ func start_decoding():
 	decoded.add_substr(s)
 	code_pos += 1
 	
-	lzw_step_table.add_step("Old= " + str(old) + ", S= " + s)
+	lzw_step_table.add_step("Old = [color=red]" + str(old) + "[/color] | S = [color=blue]" + s + "[/color]")
 	
 	var first_step_text : String = ""
 	first_step_text += "Prvi kod u kompresovanom nizu je [color=red]" + str(codes[0]) + "[/color], "
@@ -423,7 +424,7 @@ func next_decode_step() -> bool:
 	old = new
 	
 	lzw_step_table.add_step(
-		"Old= [color=red]" + str(old) + "[/color]| S= [color=green]" + s + "[/color]| New= [color=blue]" + str(new) + "[/color]| C= " + c
+		"Old = [color=red]" + str(old) + "[/color] | S = [color=green]" + s + "[/color] | New = [color=blue]" + str(new) + "[/color] | C = " + c
 	)
 	
 	notebook.clear_buttons()
