@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://mm66oc1qb3kl" path="res://misos-projekat/Scenes/General/coding_notebok.gd" id="5_luvch"]
 [ext_resource type="FontFile" uid="uid://ca38i2bshkcqm" path="res://misos-projekat/assets/fonts/AnnieUseYourTelescope-Regular.ttf" id="6_ncp0e"]
 [ext_resource type="Script" uid="uid://bikyrlsclps0p" path="res://misos-projekat/Scenes/General/eraser.gd" id="6_x6mlg"]
-[ext_resource type="FontFile" uid="uid://b3houofno1e48" path="res://misos-projekat/assets/fonts/IndieFlower-Regular.ttf" id="7_d81hf"]
 [ext_resource type="StyleBox" uid="uid://bqiax80jcpqpv" path="res://misos-projekat/Resources/Styles/lineEditStyle.tres" id="7_e5pby"]
 [ext_resource type="FontFile" uid="uid://1yry244jexlc" path="res://misos-projekat/assets/fonts/Quicksand/static/Quicksand-Bold.ttf" id="8_1vagy"]
 [ext_resource type="PackedScene" uid="uid://5df0b4j67vw0" path="res://misos-projekat/Scenes/Arithmetic/arithmetic_number_line.tscn" id="9_kk0bk"]
@@ -232,7 +231,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0.6)
-theme_override_fonts/font = ExtResource("7_d81hf")
+theme_override_fonts/font = ExtResource("6_ncp0e")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("7_e5pby")
 placeholder_text = "Unesite reč ✏️"

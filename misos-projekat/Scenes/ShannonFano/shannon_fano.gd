@@ -1,6 +1,8 @@
 class_name ShannonFanno
 extends Control
 
+const alphabet : String = "abcdefghijklmnopqrstuvwxyz"
+
 var mainInput : LineEdit
 
 var inputDisplay : InputDisplay
@@ -57,13 +59,26 @@ func _ready() -> void:
 	start_button.disabled = true
 
 func text_changed(new_text : String):
-	input_text = new_text
+	var old_caret_pos := mainInput.caret_column
+	var filtered_text := ""
 	
-	if input_text.length() == 0:
-		start_button.disabled = true
-	else:
-		start_button.disabled = false
+	for c in new_text:
+		if c in alphabet:
+			filtered_text += c
 	
+	var new_caret_pos := 0
+	for i in range(min(old_caret_pos, new_text.length())):
+		var c := new_text[i]
+		if c in alphabet:
+			new_caret_pos += 1
+	
+	if filtered_text != new_text:
+		mainInput.set_text(filtered_text)
+		mainInput.caret_column = new_caret_pos
+	
+	input_text = filtered_text
+	
+	start_button.disabled = input_text.is_empty()
 	text_count_label.text = str(input_text.length()) + "/10"
 
 func _on_start_button_pressed() -> void:
@@ -319,7 +334,6 @@ func show_decoding():
 	
 	curr_node = shannonTreeVisualizer.shannonTreeRoot
 	code_pos = 0
-	curr_node.highlight()
 	
 	notebook.display_text(
 		"Dekodiranje predstavlja obrnut proces u odnosu na kodiranje. Cilj dekodiranja je da se na " +
@@ -354,6 +368,8 @@ func show_decoding():
 	)
 	await notebook.displayed_text
 	await notebook.add_button("Dekodiraj").pressed
+	
+	curr_node.highlight()
 	
 	while (code_pos < coded_label.display_text.length()):
 		var bit : String = coded_label.get_char(code_pos)
@@ -401,6 +417,8 @@ func show_decoding():
 		"omogućava potpuno vraćanje originalnih podataka iz njihovog kompresovanog oblika, bez gubitka informacija.",
 		2.0
 	)
+	
+	notebook.add_button("Ponovo")
 
 func NextCodeStep() -> bool:
 	var symbol : String = input_text[inputPos]

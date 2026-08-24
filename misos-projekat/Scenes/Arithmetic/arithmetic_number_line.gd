@@ -10,11 +10,14 @@ class SymbolInterval:
 	var start_num : float
 	var end_num : float
 	
-	func _init(_start : float, _end: float, _start_num: float, _end_num: float) -> void:
+	var symbol : String
+	
+	func _init(_start : float, _end: float, _start_num: float, _end_num: float, symbol_ : String) -> void:
 		start = _start
 		end = _end
 		start_num = _start_num
 		end_num = _end_num
+		symbol = symbol_
 
 const TOTAL_HEIGHT : int = 50
 
@@ -109,7 +112,7 @@ func mark_points(points : Array[float], symbols : Array[String]):
 			symbols[i-1]
 		) 
 		
-		symbol_subintervals[symbols[i-1]] = SymbolInterval.new(prev_x, x_pos, points[i-1], points[i])
+		symbol_subintervals[symbols[i-1]] = SymbolInterval.new(prev_x, x_pos, points[i-1], points[i], symbols[i])
 		prev_x = x_pos
 		
 		await get_tree().create_timer(0.2).timeout
@@ -124,7 +127,8 @@ func mark_points(points : Array[float], symbols : Array[String]):
 		prev_x,
 		lineLength, 
 		points[-2],
-		points[-1]
+		points[-1],
+		symbols.back()
 	)
 
 func add_vertical_line(x_pos : float, total_height : float) -> Line2D:
@@ -266,8 +270,18 @@ func mark_point(value : float):
 		circlePoints.append(point_radius * Vector2(cos(i*angle_step), sin(i*angle_step)))
 	circle.polygon = circlePoints
 	
-	circle.position.x = x_cord
+	circle.position.x = 0
+	circle.z_index = 1
+	
 	add_child(circle)
+	
+	var pos_tween : Tween = create_tween()
+	await pos_tween.tween_property(
+		circle,
+		"position:x",
+		x_cord,
+		1.0
+	).set_trans(Tween.TRANS_BACK).finished
 
 func get_point_interval(point : float) -> SymbolInterval:
 	for interval : SymbolInterval in symbol_subintervals.values():

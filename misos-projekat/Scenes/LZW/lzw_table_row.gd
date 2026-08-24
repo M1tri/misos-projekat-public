@@ -3,7 +3,7 @@ extends HBoxContainer
 
 var column_texts : Array[String]
 
-var font = load("res://misos-projekat/assets/fonts/AnnieUseYourTelescope-Regular.ttf")
+var font = load("res://misos-projekat/assets/fonts/Quicksand/static/Quicksand-Bold.ttf")
 
 func _init(column_texts_ : Array[String]) -> void:
 	column_texts = column_texts_

@@ -6,7 +6,7 @@ var dict : Dictionary[String, int] = {}
 var next_code : int
 var rows : Array[LZWTabelRow] = []
 
-var font = load("res://misos-projekat/assets/fonts/AnnieUseYourTelescope-Regular.ttf")
+var font = load("res://misos-projekat/assets/fonts/Quicksand/static/Quicksand-Bold.ttf")
 
 @onready var header : HBoxContainer = $Header
 

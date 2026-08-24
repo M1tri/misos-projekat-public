@@ -38,7 +38,7 @@ func _ready() -> void:
 	if rightChild:
 		rightChild.line_to_parent.connect(draw_line_to_child)
 	
-	draw_outline(radius, Color.BLACK)
+	draw_body(radius, Color.BLACK)
 
 func draw_line_to_child(child : ShannonTreeNode):
 	var bit : String = "0" if child == leftChild else "1" # :(
@@ -46,8 +46,7 @@ func draw_line_to_child(child : ShannonTreeNode):
 	
 	draw_line.emit(self, child, bit, Vector2(dx, -10))
 
-
-func draw_outline(r : float, color : Color):
+func draw_body(r : float, color : Color):
 	var points = PackedVector2Array()
 	var seg : int = 32
 	
@@ -60,32 +59,27 @@ func draw_outline(r : float, color : Color):
 	outline.default_color = color
 	outline.width = 4
 	outline.antialiased = true
+	
+	body.polygon = points
+	body.color = Color.GREEN if is_leaf() else Color.WHITE
 
 func light_up(delay):
 	outline.default_color = Color.RED
-	var outlineColorTween : Tween = create_tween()
-	outlineColorTween.tween_property(
-		outline,
-		"default_color",
-		Color.BLACK,
-		delay
-	)
 	
-	var target : float = outline.width
-	outline.width *= 2
-	var outlineWidthTween : Tween = create_tween()
-	outlineWidthTween.tween_property(
-		outline,
-		"width",
-		target,
-		delay
+	var tween : Tween = create_tween()
+	tween.tween_method(
+		func (t):
+			draw_body(lerp(DEFAULT_RADIUS+10, DEFAULT_RADIUS, t), lerp(Color.RED, Color.BLACK, t)),
+			0.0,
+			1.0,
+			delay
 	)
 
 func highlight():
-	draw_outline(DEFAULT_RADIUS+10, Color.RED)
+	draw_body(DEFAULT_RADIUS+10, Color.RED)
 
 func unhighlight():
-	draw_outline(DEFAULT_RADIUS, Color.BLACK)
+	draw_body(DEFAULT_RADIUS, Color.BLACK)
 
 func is_leaf() -> bool:
 	return self.leftChild == null and self.rightChild == null

@@ -33,6 +33,12 @@ corner_radius_bottom_left = 10
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_de7sw"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqbt1"]
 bg_color = Color(0.4392157, 0.76862746, 0.5411765, 1)
 border_color = Color(0.96818167, 0.73225623, 0.73433214, 1)
@@ -55,6 +61,12 @@ corner_radius_bottom_left = 10
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6crix"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0nfp2"]
 bg_color = Color(0.4392157, 0.60784316, 0.81960785, 1)
 border_color = Color(0.41960785, 0.6431373, 0.6784314, 1)
@@ -73,6 +85,12 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i81pc"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2g1ya"]
 bg_color = Color(0.6, 0, 0, 1)
@@ -140,6 +158,7 @@ theme_override_colors/font_disabled_color = Color(0, 0, 0, 0.5019608)
 theme_override_fonts/font = ExtResource("2_f0jms")
 theme_override_styles/normal = SubResource("StyleBoxFlat_px50b")
 theme_override_styles/hover = SubResource("StyleBoxFlat_elxan")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_de7sw")
 text = "LZW"
 
 [node name="ShannonButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/Navbar" unique_id=325883396]
@@ -150,6 +169,7 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_f0jms")
 theme_override_styles/normal = SubResource("StyleBoxFlat_qqbt1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f0jms")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6crix")
 text = "Shannon-Fano"
 
 [node name="ArithemticButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/Navbar" unique_id=233934195]
@@ -160,6 +180,7 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_f0jms")
 theme_override_styles/normal = SubResource("StyleBoxFlat_0nfp2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_20qlo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_i81pc")
 text = "Arithmetic"
 
 [node name="Quit" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/Navbar" unique_id=1384371064]

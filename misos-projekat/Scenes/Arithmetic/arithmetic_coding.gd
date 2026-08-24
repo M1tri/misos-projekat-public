@@ -1,6 +1,8 @@
 class_name Arithmetic
 extends Control
 
+const alphabet : String = "abcdefghijklmnopqrstuvwxyz"
+
 var symbolTable : SymbolTableContainer
 
 var inputDisplay : InputDisplay
@@ -50,13 +52,26 @@ func _ready() -> void:
 	start_button.disabled = true
 
 func input_changed(new_text : String):
-	input_text = new_text
+	var old_caret_pos := input.caret_column
+	var filtered_text := ""
 	
-	if input_text.length() == 0:
-		start_button.disabled = true
-	else:
-		start_button.disabled = false
+	for c in new_text:
+		if c in alphabet:
+			filtered_text += c
 	
+	var new_caret_pos := 0
+	for i in range(min(old_caret_pos, new_text.length())):
+		var c := new_text[i]
+		if c >= "a" and c <= "z":
+			new_caret_pos += 1
+	
+	if filtered_text != new_text:
+		input.set_text(filtered_text)
+		input.caret_column = new_caret_pos
+	
+	input_text = filtered_text
+	
+	start_button.disabled = input_text.is_empty()
 	text_count_label.text = str(input_text.length()) + "/6"
 
 func _on_start_button_pressed() -> void:
@@ -248,8 +263,9 @@ func begin_decoding():
 	notebook.clear_buttons()
 	
 	notebook.display_text(
-		"Za uspesno dekodiraje neophodno je znati duzinu kodiranog niza, kao i verovatnoce simbola. " +
-		"Prvi je korak je ponovo podela intervala (0, 1) na podintervalu na osnovu verovatnoca simbola. ",
+		"Da bi dekodiranje bilo uspešno, neophodno je koristiti iste verovatnoće i isti " +
+		"raspored podintervala koji su korišćeni prilikom kodiranja. Takođe, u ovoj implementaciji " +
+		"potrebno je znati i dužinu poruke koja se dekodira, dok neke druge koriste poseban terminalni simbol.",
 		2.0
 	)
 	
@@ -257,13 +273,15 @@ func begin_decoding():
 	await notebook.add_button("Dalje").pressed
 	
 	notebook.display_text(
-		"U svakom koraku pronalazimo podinterval u kome se nalazi kodiran " +
-		"podatak to predstavlja jedan simbol ulanzog niza",
+		"Proces dekodiranja može se posmatrati kao postepeno određivanje položaja kodne " +
+		"vrednosti unutar sve užih intervala. U svakom koraku kodna vrednost ostaje u okviru trenutnog " +
+		"intervala, dok se izborom odgovarajućeg podintervala određuje naredni simbol. Isti postupak se " + 
+		"ponavlja sve dok se ne dobiju svi simboli originalne poruke.",
 		2.0
 	)
 	
 	notebook.clear_buttons()
-	await notebook.add_button("Dalje").pressed
+	await notebook.add_button("Pokreni dekodiranje").pressed
 	
 	await arithmeticCodingVisualizer.beggin_decompression()
 	show_decoding()
@@ -277,12 +295,12 @@ func show_decoding():
 	
 	for i in range(input_text.length()):
 		notebook.display_text(
-			"Nakon podele intervala " + subinterval_str + " na podintervali trazimo kome intervalu pripada " +
+			"Prvo delimo trenutni interval " + subinterval_str + " na podintervale, zatim tražimo kom podintervalu pripada" +
 			code_str,
 			2.0
 		)
 		
-		await notebook.add_button("Izaberi podinterval").pressed
+		await notebook.add_button("Odredi podinterval").pressed
 		
 		var subinterval : ArithmeticNumberLine.SymbolInterval = await arithmeticCodingVisualizer.mark_code()
 		
@@ -292,17 +310,18 @@ func show_decoding():
 		notebook.clear_buttons()
 		
 		notebook.display_text(
-			"Tacka " + code_str + " pripada podintervalu " + subinterval_str + ". ",
+			"Kodna vrednost " + code_str + " nalazi se u podintervalu " + subinterval_str + " pa se kao sledeći simbol određuje " + subinterval.symbol + ". ",
 			2.0
 		)
 		
 		await notebook.displayed_text
 		
 		if i == input_text.length()-1:
+			await notebook.add_button("Dalje").pressed
 			break
 		
 		notebook.append_text(
-			"Sada prosiravamo podinterval " + subinterval_str + ".",
+			"Trenutni interval sada postaje " + subinterval_str + " i nastavljamo postupak.",
 			2.0
 		)
 		
@@ -315,10 +334,12 @@ func show_decoding():
 	notebook.clear_buttons()
 	
 	notebook.display_text(
-		"Citanjem simbola koji odgovaraju intervalima kojima je tacka pripada " +
-		"odozgo na dole dobijamo nazad originalnu kodiranu poruku",
+		"Na ovaj način aritmetičko dekodiranje omogućava potpuno vraćanje originalne poruke iz" + 
+		"kompresovane vrednosti, bez gubitka informacija.",
 		2.0
 	)
+	
+	notebook.add_button("Ponovo")
 
 func highlight(text_pos : int):
 	inputDisplay.highlight_char(text_pos)

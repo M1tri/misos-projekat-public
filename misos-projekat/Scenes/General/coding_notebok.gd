@@ -24,6 +24,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is RichTextLabel:
 			text_label = child as RichTextLabel
+			text_label.bbcode_enabled = true
 		elif child is HBoxContainer:
 			buttons_container = child as HBoxContainer
 
