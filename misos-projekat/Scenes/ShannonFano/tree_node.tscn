@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cfhrb4ek14qti"]
+
+[ext_resource type="Script" uid="uid://br3csyp6o07q6" path="res://misos-projekat/Scenes/ShannonFano/tree_node.gd" id="1_babnu"]
+
+[node name="TreeNode" type="Node2D" unique_id=38422839]
+script = ExtResource("1_babnu")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=641554485]
+
+[node name="Label" type="Label" parent="." unique_id=167966220]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "abcdefgh"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1662810692]

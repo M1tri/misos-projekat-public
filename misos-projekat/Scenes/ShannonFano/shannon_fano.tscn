@@ -1,0 +1,398 @@
+[gd_scene format=3 uid="uid://cyk2on387cjjy"]
+
+[ext_resource type="Script" uid="uid://hfp1u0vqu8gf" path="res://misos-projekat/Scenes/ShannonFano/shannon_fano.gd" id="1_xmkuo"]
+[ext_resource type="FontFile" uid="uid://b3houofno1e48" path="res://misos-projekat/assets/fonts/IndieFlower-Regular.ttf" id="2_8bucj"]
+[ext_resource type="Script" uid="uid://c5dp7b77mds6p" path="res://misos-projekat/Scenes/General/symbol_table_container.gd" id="2_iuynv"]
+[ext_resource type="Script" uid="uid://brpry3lgc68xa" path="res://misos-projekat/Scenes/General/input_display.gd" id="2_k7tgj"]
+[ext_resource type="StyleBox" uid="uid://bqiax80jcpqpv" path="res://misos-projekat/Resources/Styles/lineEditStyle.tres" id="3_6rier"]
+[ext_resource type="FontFile" uid="uid://damk8qqt17x1c" path="res://misos-projekat/assets/fonts/CabinSketch-Bold.ttf" id="3_g5gj0"]
+[ext_resource type="Texture2D" uid="uid://ngj7sbcxh6ew" path="res://misos-projekat/assets/clamp128.png" id="4_1q482"]
+[ext_resource type="FontFile" uid="uid://1yry244jexlc" path="res://misos-projekat/assets/fonts/Quicksand/static/Quicksand-Bold.ttf" id="4_ihs1b"]
+[ext_resource type="Script" uid="uid://cakdl0asyyqfq" path="res://misos-projekat/Scenes/ShannonFano/tree_visualizer.gd" id="5_fxa2o"]
+[ext_resource type="Texture2D" uid="uid://c3raecdq861wd" path="res://misos-projekat/assets/sponge64.png" id="5_vi1wt"]
+[ext_resource type="Script" uid="uid://bikyrlsclps0p" path="res://misos-projekat/Scenes/General/eraser.gd" id="6_b66tm"]
+[ext_resource type="Script" uid="uid://b7vyapbs3nx8o" path="res://misos-projekat/Scenes/General/spine.gd" id="6_cruaf"]
+[ext_resource type="Script" uid="uid://mm66oc1qb3kl" path="res://misos-projekat/Scenes/General/coding_notebok.gd" id="10_rhf87"]
+[ext_resource type="FontFile" uid="uid://ca38i2bshkcqm" path="res://misos-projekat/assets/fonts/AnnieUseYourTelescope-Regular.ttf" id="11_4s7ax"]
+[ext_resource type="Script" uid="uid://dr3tkw1vbudag" path="res://misos-projekat/Scenes/General/PaperPanel.gd" id="11_5shiy"]
+[ext_resource type="Script" uid="uid://cct1lpk2w21fn" path="res://misos-projekat/Scenes/General/RicherLabel.gd" id="13_a4oyw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bucj"]
+bg_color = Color(0.4392157, 0.76862746, 0.5411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rier"]
+bg_color = Color(0.4392157, 0.76862746, 0.5411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekukc"]
+bg_color = Color(0.29803923, 0.5647059, 0.38431373, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihs1b"]
+bg_color = Color(0.43529412, 0.7647059, 0.5372549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5shiy"]
+bg_color = Color(0.15294118, 0.29803923, 0.2627451, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.4, 0.25882354, 0.15686275, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4oyw"]
+bg_color = Color(0.15294118, 0.29803923, 0.2627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxa2o"]
+bg_color = Color(0.5803922, 0.43137255, 0.2901961, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1q482"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vi1wt"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b66tm"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5gj0"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[node name="ShannonFanoVisualization" type="Control" unique_id=674139878]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_xmkuo")
+
+[node name="GUI" type="PanelContainer" parent="." unique_id=1971150357]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1040.0
+mouse_filter = 1
+
+[node name="Panel" type="Panel" parent="GUI" unique_id=1688070859]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8bucj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI" unique_id=982163589]
+layout_mode = 2
+
+[node name="InputAndCounting" type="VBoxContainer" parent="GUI/HBoxContainer" unique_id=807669536]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/separation = 25
+
+[node name="InputMargin" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting" unique_id=793836288]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 25
+
+[node name="Input" type="HBoxContainer" parent="GUI/HBoxContainer/InputAndCounting/InputMargin" unique_id=877804988]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MainInput" type="LineEdit" parent="GUI/HBoxContainer/InputAndCounting/InputMargin/Input" unique_id=195445177 groups=["Input"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0.6)
+theme_override_fonts/font = ExtResource("2_8bucj")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("3_6rier")
+placeholder_text = "Unesite reč ✏️"
+alignment = 1
+max_length = 10
+caret_blink = true
+
+[node name="TextCount" type="Label" parent="GUI/HBoxContainer/InputAndCounting/InputMargin/Input" unique_id=436779969]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/font = ExtResource("4_ihs1b")
+theme_override_font_sizes/font_size = 26
+text = "0/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="GUI/HBoxContainer/InputAndCounting/InputMargin/Input" unique_id=424280843]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_fonts/font = ExtResource("4_ihs1b")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_6rier")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekukc")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ihs1b")
+text = "Pokreni ▶︎"
+
+[node name="InputDisplayMargin" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting" unique_id=1946864348]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 25
+
+[node name="InputDisplay" type="RichTextLabel" parent="GUI/HBoxContainer/InputAndCounting/InputDisplayMargin" unique_id=480259465 groups=["InputDisplay"]]
+clip_contents = false
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_g5gj0")
+theme_override_font_sizes/normal_font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_5shiy")
+bbcode_enabled = true
+text = "a"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+script = ExtResource("2_k7tgj")
+
+[node name="Eraser" type="Sprite2D" parent="GUI/HBoxContainer/InputAndCounting/InputDisplayMargin/InputDisplay" unique_id=1715713805]
+z_index = 1
+texture_filter = 1
+position = Vector2(510, 31)
+scale = Vector2(0.875, 0.8750005)
+texture = ExtResource("5_vi1wt")
+script = ExtResource("6_b66tm")
+
+[node name="EraserPanel" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting/InputDisplayMargin/InputDisplay" unique_id=796530236]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 63.0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="GUI/HBoxContainer/InputAndCounting/InputDisplayMargin/InputDisplay/EraserPanel" unique_id=395153997]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a4oyw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/HBoxContainer/InputAndCounting" unique_id=2000683461]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="STCMargin" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer" unique_id=214650427]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 10
+
+[node name="WoodBorder" type="Panel" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/STCMargin" unique_id=1132170820]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fxa2o")
+
+[node name="PaperMargin" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/STCMargin" unique_id=393394349]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Paper" type="Panel" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/STCMargin/PaperMargin" unique_id=923696222]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1q482")
+
+[node name="SymbolTableContainer" type="Control" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/STCMargin" unique_id=2103341306 groups=["SymbolTableContainer"]]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_iuynv")
+
+[node name="Clip" type="Sprite2D" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/STCMargin/SymbolTableContainer" unique_id=87034406]
+texture_filter = 1
+position = Vector2(205, -8)
+texture = ExtResource("4_1q482")
+
+[node name="Steps" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer" unique_id=2067511098]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 10
+
+[node name="Notebook" type="HBoxContainer" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/Steps" unique_id=659590817]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Spine" type="Panel" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/Steps/Notebook" unique_id=1195986282]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_vi1wt")
+script = ExtResource("6_cruaf")
+
+[node name="Page" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/Steps/Notebook" unique_id=1441533910]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="PageBackground" type="Panel" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/Steps/Notebook/Page" unique_id=911451180]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+theme_override_styles/panel = SubResource("StyleBoxFlat_b66tm")
+
+[node name="Content" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/Steps/Notebook/Page" unique_id=1059528633]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Content" type="VBoxContainer" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/Steps/Notebook/Page/Content" unique_id=872313835 groups=["ArithmeticNotebook"]]
+layout_mode = 2
+script = ExtResource("10_rhf87")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/Steps/Notebook/Page/Content/Content" unique_id=879824151]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("11_4s7ax")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+
+[node name="Buttons" type="HBoxContainer" parent="GUI/HBoxContainer/InputAndCounting/VBoxContainer/Steps/Notebook/Page/Content/Content" unique_id=1521311406]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Tree" type="VBoxContainer" parent="GUI/HBoxContainer" unique_id=1720450261]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/HBoxContainer/Tree" unique_id=788244621]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 72
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="GUI/HBoxContainer/Tree/MarginContainer" unique_id=2078554869]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g5gj0")
+script = ExtResource("11_5shiy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/HBoxContainer/Tree/MarginContainer" unique_id=1817974007]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/HBoxContainer/Tree/MarginContainer/VBoxContainer" unique_id=1717160633]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+theme_override_constants/margin_top = 25
+
+[node name="ShannonTreeVisualizer" type="Control" parent="GUI/HBoxContainer/Tree/MarginContainer/VBoxContainer/MarginContainer" unique_id=718538646 groups=["ShannonTreeVisualizer"]]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+mouse_filter = 1
+script = ExtResource("5_fxa2o")
+
+[node name="Coded" type="MarginContainer" parent="GUI/HBoxContainer/Tree/MarginContainer/VBoxContainer" unique_id=1332332960]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/HBoxContainer/Tree/MarginContainer/VBoxContainer/Coded" unique_id=1630613499]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Decoded" type="RichTextLabel" parent="GUI/HBoxContainer/Tree/MarginContainer/VBoxContainer/Coded/VBoxContainer" unique_id=829493558]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0.015686275, 0, 1)
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("13_a4oyw")
+
+[node name="Coded" type="RichTextLabel" parent="GUI/HBoxContainer/Tree/MarginContainer/VBoxContainer/Coded/VBoxContainer" unique_id=1437219974]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("13_a4oyw")
+
+[node name="InputAnalysisTimer" type="Timer" parent="." unique_id=1366409880]
+one_shot = true
+
+[node name="TreeTimer" type="Timer" parent="." unique_id=1112265044]
+wait_time = 2.0
+one_shot = true
+
+[node name="CodingTimer" type="Timer" parent="." unique_id=1590945079]
+one_shot = true
+
+[connection signal="pressed" from="GUI/HBoxContainer/InputAndCounting/InputMargin/Input/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="InputAnalysisTimer" to="." method="_on_input_analysis_timer_timeout"]
+[connection signal="timeout" from="TreeTimer" to="." method="_on_tree_timer_timeout"]
+[connection signal="timeout" from="CodingTimer" to="." method="_on_coding_timer_timeout"]

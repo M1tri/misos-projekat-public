@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://5df0b4j67vw0"]
+
+[ext_resource type="Script" uid="uid://c31t2cs2tw47h" path="res://misos-projekat/Scenes/Arithmetic/arithmetic_number_line.gd" id="1_ouwd6"]
+
+[node name="ArithmeticNumberLine" type="Node2D" unique_id=577717157]
+script = ExtResource("1_ouwd6")
