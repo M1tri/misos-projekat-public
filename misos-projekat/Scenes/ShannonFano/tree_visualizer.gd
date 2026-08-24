@@ -17,6 +17,22 @@ class Step:
 	func add(node : ShannonTreeNode):
 		nodesToAdd.append(node)
 
+class StepText :
+	var full_array : String
+	
+	var left : String
+	var right : String
+	
+	var left_sum : int
+	var right_sum : int
+	
+	func _init(full_array_ : String, left_ : String, right_ : String, left_sum_ : int, right_sum_ : int) -> void:
+		full_array = full_array_
+		left = left_
+		right = right_
+		left_sum = left_sum_
+		right_sum = right_sum_
+
 var codes : Dictionary[String, String] = {}
 
 var current_leaf : int = 0
@@ -26,7 +42,7 @@ var tree_nodes : Array[ShannonTreeNode] = []
 var sequence : Array[Step] = []
 var sequence_pos : int = -1
 
-var step_texts : Array[String] = []
+var step_texts : Array[StepText] = []
 
 var lines : Array[Line2D] = []
 var lineLabels : Array[Label] = []
@@ -122,7 +138,7 @@ func CalculateSequence(node : ShannonTreeNode, depth : int):
 	if (node.rightChild):
 		CalculateSequence(node.rightChild, depth+1)
 
-func GetStepText() -> String:
+func GetStepText() -> StepText:
 	return step_texts[sequence_pos]
 
 func NextStep() -> bool:
@@ -138,6 +154,9 @@ func get_code(symbol : String) -> String:
 	if symbol not in codes:
 		return ""
 	return codes[symbol]
+
+func get_codes() -> Dictionary[String, String]:
+	return codes
 
 func move_tree(dx : float, dy : float):
 	if shannonTreeRoot == null:
@@ -280,7 +299,7 @@ func calculate_shannon_tree(message : String) -> ShannonTreeNode:
 			return s1.frequency > s2.frequency
 			)
 	
-	step_texts.append("Krecemo od root")
+	step_texts.append(StepText.new("", "", "", 0, 0)) # dummy jer sam zeznuo funkcije
 	var root : ShannonTreeNode = shannon_fanno(symbols)
 	shannonTreeRoot = root
 	move_tree(0, 25)
@@ -333,10 +352,18 @@ func shannon_fanno(symbols : Array[ShannonSymbol]) -> ShannonTreeNode:
 	var node : ShannonTreeNode = shannon_tree_node_scene.instantiate()
 	node.text = text
 	
-	var step_text : String = str(step_texts.size()+1) + ": "
-	step_text += arr_to_str(symbols) + " → "
-	step_text += arr_to_str(left) + " [[color=red]" + str(arr_sum(left)) + "[/color]]"
-	step_text += " | " + arr_to_str(right) + " [[color=red]" + str(arr_sum(right)) + "[/color]]"
+	#var step_text : String = str(step_texts.size()+1) + ": "
+#	step_text += arr_to_str(symbols) + " → "
+#	step_text += arr_to_str(left) + " [[color=red]" + str(arr_sum(left)) + "[/color]]"
+#	step_text += " | " + arr_to_str(right) + " [[color=red]" + str(arr_sum(right)) + "[/color]]"
+	
+	var step_text : StepText = StepText.new(
+		arr_to_str(symbols),
+		arr_to_str(left),
+		arr_to_str(right),
+		arr_sum(left),
+		arr_sum(right)
+	)
 	
 	step_texts.append(
 		 step_text
@@ -350,8 +377,8 @@ func shannon_fanno(symbols : Array[ShannonSymbol]) -> ShannonTreeNode:
 func arr_to_str(array : Array[ShannonSymbol]) -> String:
 	var ret : String = ""
 	for i in range(0, array.size()-1):
-		ret += array[i].text + " "
-	ret += array.back().text
+		ret += array[i].text + " (" + str(array[i].frequency) + "), "
+	ret += array.back().text + " (" + str(array.back().frequency) + ")"
 	return ret 
 
 func arr_sum(array : Array[ShannonSymbol]) -> int:

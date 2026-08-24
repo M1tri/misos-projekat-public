@@ -41,7 +41,7 @@ func _ready() -> void:
 	draw_outline(radius, Color.BLACK)
 
 func draw_line_to_child(child : ShannonTreeNode):
-	var bit : String = "0" if child == leftChild else "0" # :(
+	var bit : String = "0" if child == leftChild else "1" # :(
 	var dx : float = -10 if child == leftChild else 10 # :( :( :(
 	
 	draw_line.emit(self, child, bit, Vector2(dx, -10))

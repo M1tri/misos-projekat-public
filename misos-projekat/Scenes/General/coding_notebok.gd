@@ -31,6 +31,9 @@ func set_button_colors(colors : Dictionary[BUTTON_COLOR, Color]):
 	for color in colors:
 		button_colors[color] = colors[color]
 
+func set_font_size(font_size : int):
+	text_label.add_theme_font_size_override("normal_font_size", font_size)
+
 func display_text(text : String, duration : float):
 	text_label.text = text
 	var char_count : int = text_label.get_total_character_count()

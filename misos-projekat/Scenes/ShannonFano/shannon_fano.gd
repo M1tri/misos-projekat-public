@@ -52,6 +52,8 @@ func _ready() -> void:
 		}
 	)
 	
+	notebook.set_font_size(25)
+	
 	start_button.disabled = true
 
 func text_changed(new_text : String):
@@ -83,11 +85,11 @@ func _on_start_button_pressed() -> void:
 
 func start_input_analysis():
 	notebook.display_text(
-		"Prvi korak je da vidimo koji sve karakteri ima u ulaz i " +
-		"kolko puta se koji javlja",
+		"Proces kodiranja Shannon-Fano algoritmom zasniva se na određivanju učestalosti simbola " +
+		"u ulaznom nizu i njihovom postepenom razdvajanju u grupe. Pre samog formiranja koda " + 
+		"potrebno je odrediti koliko se puta svaki simbol pojavljuje",
 		2.0
 	)
-	
 	await notebook.displayed_text
 	
 	await notebook.add_button("Prebroji simbole").pressed
@@ -105,8 +107,9 @@ func next_char():
 		notebook.clear_buttons()
 		
 		notebook.display_text(
-			"Nakon prebrojavanja neophodno je sortirati listu simbolu " +
-			"po broju pojavljivanja od najcesceg do najredjeg simbola",
+			"Nakon prebrojavanja, simboli se sortiraju prema " +
+			"opadajućem broju pojavljivanja. Tako se najčešće zastupljeni simboli nalaze na početku liste, dok " + 
+			"se ređi simboli nalaze na njenom kraju",
 			2.0
 		)
 		
@@ -122,13 +125,13 @@ func next_char():
 		notebook.clear_text()
 		
 		notebook.display_text(
-			"Nakon sortiranja liste mozemo da krenemo sa crtanjem stabla",
-			2.0
+			"Sledeći korak predstavlja formiranje stabla. ",
+			1.0
 		)
 		
 		await notebook.displayed_text
 		
-		var button : Button = notebook.add_button("Crtaj stablo")
+		var button : Button = notebook.add_button("Dalje")
 		button.pressed.connect(show_tree)
 		await button.pressed
 		
@@ -136,6 +139,7 @@ func next_char():
 		
 		shannonTreeVisualizer.DrawTree(root)
 		shannonTreeVisualizer.NextStep()
+		
 		return
 	
 	var next : String = input_text[inputPos]
@@ -146,12 +150,11 @@ func next_char():
 	inputPos += 1
 
 func show_tree():
-	notebook.clear_text()
 	notebook.clear_buttons()
 	
-	notebook.display_text(
-		"Krecemo od cvora koji predstavlja sve simbole, ovaj cvor ce biti koren stabla",
-		2.0
+	notebook.append_text(
+		"Krećemo od čvora koji predstavlja sve simbole, ovaj čvor će biti koren stabla. ",
+		1.0
 	)
 	
 	await notebook.displayed_text
@@ -160,14 +163,34 @@ func show_tree():
 	
 	var finished : bool = false
 	
+	var step_count : int = 1
 	while (not finished):
-		var step_text : String = shannonTreeVisualizer.GetStepText()
+		var step_text : ShannonTreeVisualizer.StepText = shannonTreeVisualizer.GetStepText()
 		
 		notebook.clear_buttons()
 		notebook.clear_text()
 		
+		var text : String = "U " + str(step_count) + ". koraku obrađujemo grupu simbola\n"
+		text += step_text.full_array + "\n"
+		text += "Ovu grupu delimo u dve podgrupe:\n" + step_text.left + " | " + step_text.right + "\n"
+		
 		notebook.display_text(
-			step_text,
+			text,
+			2.0
+		)
+		
+		await notebook.displayed_text
+		await notebook.add_button("Dalje").pressed
+		
+		text = step_text.full_array + " → " + step_text.left + " | " + step_text.right
+		text +=  "\nNa ovaj način početna grupa se deli na dve sa ukupnim brojem pojavljivanja "
+		text += str(step_text.left_sum) + " i " + str(step_text.right_sum) + " respektivno. "
+		text += "U stablu se formiraju dve grane iz početnog čvora, pri čemu se levoj grani dodeljuje 0, a desnoj 1."
+		
+		notebook.clear_buttons()
+		notebook.clear_text()
+		notebook.display_text(
+			text,
 			2.0
 		)
 		
@@ -175,54 +198,120 @@ func show_tree():
 		await notebook.add_button("Dalje").pressed
 		
 		finished = shannonTreeVisualizer.NextStep()
+		step_count += 1
 	
 	notebook.clear_buttons()
 	notebook.clear_text()
 	
 	notebook.display_text(
-		"Gotovo je sad se treba kodira",
-		2.0
-	)
-	
-	inputPos = 0
-	notebook.add_button("Kodiraj").pressed.connect(show_coding)
-
-func show_coding():
-	notebook.clear_buttons()
-	notebook.display_text(
-		"Kodiranje je izuzetno prosto jer kodove simbola smo dobili tokom " +
-		"formiranja stabla i odatle direktno citamo kod za svaki simbol iz ulaza " +
-		"i to pisemo na izlaz",
+		"Postupak se završava kada svaka grupa sadrži tačno jedan simbol. U čvorovima koji nisu " +
+		"listovi prikazane su grupe simbola koje nastaju tokom uzastopnih podela, dok se u listovima " +
+		"nalaze pojedinačni simboli.",
 		2.0
 	)
 	
 	await notebook.displayed_text
-	symbolTableContainer.set_column_name(2, "Kod")
-	for symbol in input_text:
-		symbolTableContainer.change_symbol_counter_text(symbol, shannonTreeVisualizer.get_code(symbol))
-	
-	coded_label.set_new_text("")
-	
 	await notebook.add_button("Dalje").pressed
 	
 	notebook.clear_buttons()
 	notebook.clear_text()
 	
-	var finished : bool = NextCodeStep()
-	while (not finished):
-		notebook.clear_buttons()
-		await notebook.add_button("Dalje").pressed
-		finished = NextCodeStep()
+	notebook.display_text(
+		"Na osnovu formiranog stabla mogu se odrediti kodne reči pojedinačnih simbola. Kod se " +
+		"dobija praćenjem putanje od korena do lista i zapisivanjem vrednosti grana, pri čemu leva grana " + 
+		"predstavlja 0, a desna 1",
+		2.0
+	)
+	
+	await notebook.displayed_text
+	await notebook.add_button("Zapiši kodove").pressed
+	
+	var codes : Dictionary[String, String] = shannonTreeVisualizer.get_codes()
+	
+	for symbol in codes:
+		shannonTreeVisualizer.light_up_leaf(symbol, 1.0)
+		symbolTableContainer.change_symbol_counter_text(symbol, codes[symbol])
+		symbolTableContainer.highlight_row(symbol, 1.0)
+		await get_tree().create_timer(1.3).timeout
+	
+	symbolTableContainer.set_column_name(2, "Kod")
+	inputPos = 0
+	notebook.clear_buttons()
+	notebook.add_button("Pređi na kodiranje").pressed.connect(show_coding)
+
+func show_coding():
+	notebook.clear_buttons()
+	notebook.display_text(
+		"Ove kodne reči se zatim koriste za predstavljanje simbola u procesu Shannon-Fano " +
+		"kodiranja. Za dati ulazni niz, svaki simbol se zamenjuje odgovarajućom kodnom rečju. ",
+		2.0
+	)
+	
+	await notebook.displayed_text
+	
+	coded_label.set_new_text("")
+	await notebook.add_button("Dalje").pressed
 	
 	notebook.clear_buttons()
 	notebook.clear_text()
 	
 	notebook.display_text(
-		"Sad se treba pokazuje dekodiranje",
+		"Prvi simbol ulaznog niza je " + input_text[0] + ", a njemu odgovara kod " +
+		shannonTreeVisualizer.get_code(input_text[0]) + ". U prvom koraku kodiranja " +
+		"taj kod pišemo na izlaz. ",
 		2.0
 	)
 	
-	notebook.add_button("Dalje").pressed.connect(show_decoding)
+	await notebook.displayed_text
+	
+	var finished : bool = NextCodeStep()
+	while (not finished):
+		if inputPos == 1:
+			notebook.clear_buttons()
+			notebook.append_text(
+				"Ovo nastavljamo dok nismo obradili čitav ulazni niz.",
+				1.0
+			)
+			await notebook.add_button("Dalje").pressed
+		
+		finished = NextCodeStep()
+		await get_tree().create_timer(1).timeout
+	
+	notebook.clear_buttons()
+	notebook.clear_text()
+	
+	notebook.display_text(
+		"Ovakvim postupkomn kodiranja svaki simbol originalnog niza jednoznačno je predstavljen odgovarajućom " + 
+		"Shannon-Fano kodnom rečju. ",
+		2.0
+	)
+	
+	await notebook.add_button("Dalje").pressed
+
+	notebook.clear_buttons()
+	notebook.clear_text()
+	
+	notebook.display_text(
+		"Shannon-Fano stablo ne mora uvek imati potpuno isti oblik, jer način podele simbola " +
+		"može zavisiti od izbora između podgrupa sa približno jednakim brojem pojavljivanja. Takođe, " +
+		"vrednosti 0 i 1 mogu se dodeliti granama na različite načine.",
+		2.0
+	)
+	
+	await notebook.add_button("Dalje").pressed
+
+	notebook.clear_buttons()
+	notebook.clear_text()
+	
+	notebook.display_text(
+		"U ovom radu usvojeno je pravilo da leva grana ima vrednost 0, a desna 1, " + 
+		"dok bi izbor leve grane kao 1, a desne kao 0 doveo do drugačijih kodnih reči, " +
+		"princip kodiranja i dekodiranja bi ostao isti. Bitno je da se izabrano " +
+		"pravilo dosledno primenjuje na celo stablo.",
+		2.0
+	)
+	
+	notebook.add_button("Pređi na dekodiranje").pressed.connect(show_decoding)
 
 func show_decoding():
 	notebook.clear_buttons()
@@ -233,16 +322,38 @@ func show_decoding():
 	curr_node.highlight()
 	
 	notebook.display_text(
-		"Dekodiranje se radi tako sto se ide bit po bit kroz kodirani podatak " +
-		"i kad je 0 ide se levo kad je 1 desno krece se od root kad se dodje do list " +
-		"znaci da se taj simbol dekodirao i onda se opet nastavlja od root ce smisli " +
-		"pookie bolji tekst ja nju volim mnogo",
+		"Dekodiranje predstavlja obrnut proces u odnosu na kodiranje. Cilj dekodiranja je da se na " +
+		"osnovu binarnog niza i prethodno formiranog Shannon-Fano stabla ponovo dobije originalni niz " + 
+		"simbola. Za razliku od kodiranja, tokom dekodiranja nije potrebno ponovo određivati broj " +
+		"pojavljivanja simbola niti formirati stablo, već se koristi već postojeća struktura stabla.",
 		2.0
 	)
 	
 	await notebook.displayed_text
+	await notebook.add_button("Dalje").pressed
 	
-	await notebook.add_button("Ajde dekodiraj").pressed
+	notebook.clear_buttons()
+	notebook.clear_text()
+	
+	notebook.display_text(
+		"Dekodiranje započinje u korenu Shannon-Fano stabla. Binarni niz se čita redom, bit po " +
+		"bit. Za svaki pročitani bit bira se odgovarajuća grana stabla. ",
+		2.0
+	)
+	
+	await notebook.displayed_text
+	await notebook.add_button("Dalje").pressed
+	
+	notebook.clear_buttons()
+	
+	notebook.display_text(
+		"Kada se dođe do lista, pronađen je jedan simbol originalnog niza. Simbol koji se nalazi u " +
+		"tom listu dodaje se u rezultat dekodiranja, a postupak se zatim ponavlja od korena stabla za " +
+		"sledeći bit kompresovanog niza.",
+		2.0
+	)
+	await notebook.displayed_text
+	await notebook.add_button("Dekodiraj").pressed
 	
 	while (code_pos < coded_label.display_text.length()):
 		var bit : String = coded_label.get_char(code_pos)
@@ -286,7 +397,8 @@ func show_decoding():
 	curr_node.unhighlight()
 	
 	notebook.display_text(
-		"Da se izjedu neka govna za kraj",
+		"Došli smo do kraja kodiranog niza. Na ovaj način Shannon-Fano dekodiranje " + 
+		"omogućava potpuno vraćanje originalnih podataka iz njihovog kompresovanog oblika, bez gubitka informacija.",
 		2.0
 	)
 
