@@ -45,24 +45,25 @@ func erase():
 		eraser_default_pos.x, 
 		0.5
 	).finished
+	
+	inputText = ""
+	self.text = "a"
+	self.visible_characters = 0
+	eraserPanel.size = self.size
+	@warning_ignore("narrowing_conversion")
+	eraserPanel.add_theme_constant_override("margin_left", eraser.position.x)
+	
+	eraser.stop_rotating()
 
 func set_new_input_text(new_input_text : String):
 	if inputText.length() != 0:
 		await erase()
-	
-	eraserPanel.size = self.size
-	@warning_ignore("narrowing_conversion")
-	eraserPanel.add_theme_constant_override("margin_left", eraser.position.x)
 	
 	inputText = new_input_text
 	textPos = 0
 	finish_setting_input()
 
 func finish_setting_input():
-	eraser.stop_rotating()
-	@warning_ignore("narrowing_conversion")
-	eraserPanel.add_theme_constant_override("margin_left", eraser.position.x)
-	
 	self.text = inputText
 	var total_chars : int = self.get_total_character_count()
 	self.visible_characters = 0

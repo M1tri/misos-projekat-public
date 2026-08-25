@@ -4,11 +4,10 @@
 [ext_resource type="Script" uid="uid://c5dp7b77mds6p" path="res://misos-projekat/Scenes/General/symbol_table_container.gd" id="1_ym2fs"]
 [ext_resource type="Texture2D" uid="uid://ngj7sbcxh6ew" path="res://misos-projekat/assets/clamp128.png" id="2_dyxma"]
 [ext_resource type="Script" uid="uid://b8j58dgb1gwak" path="res://misos-projekat/Scenes/Arithmetic/arithmetic_coding_visualizer.gd" id="3_dyxma"]
-[ext_resource type="Script" uid="uid://b7vyapbs3nx8o" path="res://misos-projekat/Scenes/General/spine.gd" id="4_kslnj"]
+[ext_resource type="PackedScene" uid="uid://gc1c5s73dvf0" path="res://misos-projekat/Scenes/General/coding_notebook.tscn" id="4_e5pby"]
 [ext_resource type="FontFile" uid="uid://damk8qqt17x1c" path="res://misos-projekat/assets/fonts/CabinSketch-Bold.ttf" id="4_syfbx"]
 [ext_resource type="Script" uid="uid://brpry3lgc68xa" path="res://misos-projekat/Scenes/General/input_display.gd" id="4_v0s86"]
 [ext_resource type="Texture2D" uid="uid://c3raecdq861wd" path="res://misos-projekat/assets/sponge64.png" id="4_yo0gj"]
-[ext_resource type="Script" uid="uid://mm66oc1qb3kl" path="res://misos-projekat/Scenes/General/coding_notebok.gd" id="5_luvch"]
 [ext_resource type="FontFile" uid="uid://ca38i2bshkcqm" path="res://misos-projekat/assets/fonts/AnnieUseYourTelescope-Regular.ttf" id="6_ncp0e"]
 [ext_resource type="Script" uid="uid://bikyrlsclps0p" path="res://misos-projekat/Scenes/General/eraser.gd" id="6_x6mlg"]
 [ext_resource type="StyleBox" uid="uid://bqiax80jcpqpv" path="res://misos-projekat/Resources/Styles/lineEditStyle.tres" id="7_e5pby"]
@@ -33,16 +32,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_luvch"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncp0e"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5pby"]
 bg_color = Color(0.4392157, 0.60784316, 0.81960785, 1)
@@ -163,52 +152,8 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 42
 
-[node name="Notebook" type="HBoxContainer" parent="GUI/HBoxContainer/VBoxContainer/Notebook" unique_id=187899887]
+[node name="Notebook" parent="GUI/HBoxContainer/VBoxContainer/Notebook" unique_id=456305809 instance=ExtResource("4_e5pby")]
 layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Spine" type="Panel" parent="GUI/HBoxContainer/VBoxContainer/Notebook/Notebook" unique_id=283249086]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
-theme_override_styles/panel = SubResource("StyleBoxFlat_luvch")
-script = ExtResource("4_kslnj")
-
-[node name="Page" type="MarginContainer" parent="GUI/HBoxContainer/VBoxContainer/Notebook/Notebook" unique_id=913120210]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.9
-
-[node name="PageBackground" type="Panel" parent="GUI/HBoxContainer/VBoxContainer/Notebook/Notebook/Page" unique_id=1429487669]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.6
-theme_override_styles/panel = SubResource("StyleBoxFlat_ncp0e")
-
-[node name="Content" type="MarginContainer" parent="GUI/HBoxContainer/VBoxContainer/Notebook/Notebook/Page" unique_id=1924704653]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 20
-
-[node name="Content" type="VBoxContainer" parent="GUI/HBoxContainer/VBoxContainer/Notebook/Notebook/Page/Content" unique_id=381201868 groups=["ArithmeticNotebook"]]
-layout_mode = 2
-script = ExtResource("5_luvch")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer/VBoxContainer/Notebook/Notebook/Page/Content/Content" unique_id=1876723808]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 9.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("6_ncp0e")
-theme_override_font_sizes/normal_font_size = 28
-bbcode_enabled = true
-
-[node name="Buttons" type="HBoxContainer" parent="GUI/HBoxContainer/VBoxContainer/Notebook/Notebook/Page/Content/Content" unique_id=471272167]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
 
 [node name="InputAndVisual" type="VBoxContainer" parent="GUI/HBoxContainer" unique_id=1706438840]
 layout_mode = 2
@@ -232,12 +177,13 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
+tooltip_text = "Morate uneti bar 2 različita karaktera"
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0.6)
 theme_override_fonts/font = ExtResource("6_ncp0e")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("7_e5pby")
-placeholder_text = "Unesite reč ✏️"
+placeholder_text = "Unesite reč (a-z) ✏️"
 alignment = 1
 max_length = 6
 

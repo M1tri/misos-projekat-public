@@ -57,3 +57,7 @@ func add_char(new_char : String):
 
 func turn_off_highlight():
 	self.text = display_text
+
+func reset():
+	display_text = ""
+	self.text = ""

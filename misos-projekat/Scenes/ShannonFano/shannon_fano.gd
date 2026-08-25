@@ -78,13 +78,27 @@ func text_changed(new_text : String):
 	
 	input_text = filtered_text
 	
-	start_button.disabled = input_text.is_empty()
+	if not input_text.is_empty():
+		var two_unique : bool = false
+		for i in range(1, input_text.length()):
+			if input_text[i] != input_text[0]:
+				two_unique = true
+				break
+		if two_unique:
+			start_button.disabled = false
+		else:
+			start_button.disabled = true
+	else:
+		start_button.disabled = true
+		
 	text_count_label.text = str(input_text.length()) + "/10"
 
 func _on_start_button_pressed() -> void:
 	if input_text.length() == 0:
 		return
 	
+	start_button.disabled = true
+	mainInput.editable = false
 	inputDisplay.set_new_input_text(input_text)
 	inputPos = 0
 	
@@ -93,10 +107,23 @@ func _on_start_button_pressed() -> void:
 		if c not in unique:
 			unique.append(c)
 	
-	symbolTableContainer.reset()
 	symbolTableContainer.adjust_font_size(unique.size())
+
+func reset():
+	notebook.clear_buttons()
+	notebook.clear_text()
 	
+	symbolTableContainer.reset()
 	shannonTreeVisualizer.reset()
+	
+	inputDisplay.erase()
+	mainInput.editable = true
+	mainInput.text = ""
+	input_text = ""
+	text_count_label.text = "0/10"
+	
+	coded_label.reset()
+	decoded_label.reset()
 
 func start_input_analysis():
 	notebook.display_text(
@@ -419,7 +446,7 @@ func show_decoding():
 		2.0
 	)
 	
-	notebook.add_button("Ponovo")
+	notebook.add_button("Ponovo").pressed.connect(reset)
 
 func NextCodeStep() -> bool:
 	var symbol : String = input_text[inputPos]

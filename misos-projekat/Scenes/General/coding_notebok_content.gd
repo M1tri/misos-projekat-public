@@ -6,6 +6,9 @@ var buttons_container : HBoxContainer
 
 signal displayed_text
 
+var is_displaying : bool = false
+var text_tween : Tween = null
+
 var button_font = load("res://misos-projekat/assets/fonts/Quicksand/static/Quicksand-Bold.ttf")
 
 enum BUTTON_COLOR{
@@ -46,7 +49,10 @@ func display_text(text : String, duration : float):
 		"visible_characters",
 		char_count,
 		duration
-	).finished.connect(func (): displayed_text.emit())
+	).finished.connect(finish_displaying)
+	
+	is_displaying = true
+	text_tween = visible_chars_tween
 
 func append_text(text : String, duration : float):
 	var old_char_count : int = text_label.get_total_character_count()
@@ -61,7 +67,23 @@ func append_text(text : String, duration : float):
 		"visible_characters",
 		char_count,
 		duration
-	).finished.connect(func (): displayed_text.emit())
+	).finished.connect(finish_displaying)
+	
+	is_displaying = true
+	text_tween = visible_chars_tween
+
+func finish_displaying():
+	is_displaying = false
+	displayed_text.emit()
+	text_tween = null
+
+func interupt_displaying():
+	if is_displaying:
+		text_tween.kill()
+		text_tween = null
+		text_label.visible_characters = text_label.get_total_character_count()
+		displayed_text.emit()
+		is_displaying = false
 
 func clear_text():
 	text_label.text = ""

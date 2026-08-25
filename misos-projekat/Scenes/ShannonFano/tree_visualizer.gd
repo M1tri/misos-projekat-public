@@ -61,6 +61,10 @@ func reset():
 		line.queue_free()
 	lines.clear()
 	
+	for lineLabel in lineLabels:
+		lineLabel.queue_free()
+	lineLabels.clear()
+	
 	queue_redraw()
 	shannonTreeRoot = null
 

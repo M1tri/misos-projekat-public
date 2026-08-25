@@ -73,10 +73,38 @@ func input_changed(new_text : String):
 	
 	input_text = filtered_text
 	
-	start_button.disabled = input_text.is_empty()
+	if not input_text.is_empty():
+		var two_unique : bool = false
+		for i in range(1, input_text.length()):
+			if input_text[i] != input_text[0]:
+				two_unique = true
+				break
+		if two_unique:
+			start_button.disabled = false
+		else:
+			start_button.disabled = true
+	else:
+		start_button.disabled = true
+	
 	text_count_label.text = str(input_text.length()) + "/6"
 
+func reset():
+	notebook.clear_buttons()
+	notebook.clear_text()
+	
+	symbolTable.reset()
+	
+	arithmeticCodingVisualizer.reset()
+	inputDisplay.erase()
+	
+	input.editable = true
+	input_text = ""
+	input.text = ""
+	text_count_label.text = "0/6"
+
 func _on_start_button_pressed() -> void:
+	start_button.disabled = true
+	input.editable = false
 	symbolTable.reset()
 	symbolTable.adjust_font_size(input_text.length())
 	arithmeticCodingVisualizer.reset()
@@ -336,12 +364,12 @@ func show_decoding():
 	notebook.clear_buttons()
 	
 	notebook.display_text(
-		"Na ovaj način aritmetičko dekodiranje omogućava potpuno vraćanje originalne poruke iz" + 
+		"Na ovaj način aritmetičko dekodiranje omogućava potpuno vraćanje originalne poruke iz " + 
 		"kompresovane vrednosti, bez gubitka informacija.",
 		2.0
 	)
 	
-	notebook.add_button("Ponovo")
+	notebook.add_button("Ponovo").pressed.connect(reset)
 
 func highlight(text_pos : int):
 	inputDisplay.highlight_char(text_pos)

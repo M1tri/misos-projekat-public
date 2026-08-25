@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://gc1c5s73dvf0"]
+
+[ext_resource type="Script" uid="uid://b7vyapbs3nx8o" path="res://misos-projekat/Scenes/General/spine.gd" id="1_1o226"]
+[ext_resource type="Script" uid="uid://bdxdffvh14ql2" path="res://misos-projekat/Scenes/General/coding_notebook.gd" id="1_qw3dl"]
+[ext_resource type="Script" uid="uid://mm66oc1qb3kl" path="res://misos-projekat/Scenes/General/coding_notebok_content.gd" id="2_qw3dl"]
+[ext_resource type="FontFile" uid="uid://ca38i2bshkcqm" path="res://misos-projekat/assets/fonts/AnnieUseYourTelescope-Regular.ttf" id="3_lrurj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_luvch"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncp0e"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[node name="Notebook" type="HBoxContainer" unique_id=456305809]
+theme_override_constants/separation = 0
+script = ExtResource("1_qw3dl")
+
+[node name="Spine" type="Panel" parent="." unique_id=1381668687]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_luvch")
+script = ExtResource("1_1o226")
+
+[node name="Page" type="MarginContainer" parent="." unique_id=863712713]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="PageBackground" type="Panel" parent="Page" unique_id=446281388]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_ncp0e")
+
+[node name="Content" type="MarginContainer" parent="Page" unique_id=1875861804]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="Content" type="VBoxContainer" parent="Page/Content" unique_id=549834265 groups=["ArithmeticNotebook"]]
+layout_mode = 2
+script = ExtResource("2_qw3dl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Page/Content/Content" unique_id=759019078]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_lrurj")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+
+[node name="Buttons" type="HBoxContainer" parent="Page/Content/Content" unique_id=124829576]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -104,12 +104,41 @@ func input_changed(new_text : String):
 	
 	input_text = filtered_text
 	
-	start_button.disabled = input_text.is_empty()
+	if not input_text.is_empty():
+		var two_unique : bool = false
+		for i in range(1, input_text.length()):
+			if input_text[i] != input_text[0]:
+				two_unique = true
+				break
+		if two_unique:
+			start_button.disabled = false
+		else:
+			start_button.disabled = true
+	else:
+		start_button.disabled = true
 	
 	text_count_label.text = str(input_text.length()) + "/12"
 
 func _on_start_button_pressed() -> void:
+	start_button.disabled = true
+	input.editable = false
 	inputDisplay.set_new_input_text(input_text)
+
+func reset():
+	notebook.clear_buttons()
+	notebook.clear_text()
+	
+	lzw_dict.reset()
+	lzw_step_table.reset()
+	inputDisplay.erase()
+	
+	input.editable = true
+	input.text = ""
+	input_text = ""
+	text_count_label.text = "0/12"
+	
+	coded.reset()
+	decoded.reset()
 
 func show_coding():
 	notebook.clear_buttons()
@@ -346,7 +375,7 @@ func show_decoding():
 		2.0
 	)
 	
-	notebook.add_button("Ponovo")
+	notebook.add_button("Ponovo").pressed.connect(reset)
 
 func next_decode_step() -> bool:
 	var new : int = codes[code_pos]
