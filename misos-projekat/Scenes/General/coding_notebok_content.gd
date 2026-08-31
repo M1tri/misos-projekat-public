@@ -79,11 +79,11 @@ func finish_displaying():
 
 func interupt_displaying():
 	if is_displaying:
+		is_displaying = false
 		text_tween.kill()
 		text_tween = null
 		text_label.visible_characters = text_label.get_total_character_count()
 		displayed_text.emit()
-		is_displaying = false
 
 func clear_text():
 	text_label.text = ""

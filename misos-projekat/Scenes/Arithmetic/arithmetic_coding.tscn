@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://bikyrlsclps0p" path="res://misos-projekat/Scenes/General/eraser.gd" id="6_x6mlg"]
 [ext_resource type="StyleBox" uid="uid://bqiax80jcpqpv" path="res://misos-projekat/Resources/Styles/lineEditStyle.tres" id="7_e5pby"]
 [ext_resource type="FontFile" uid="uid://1yry244jexlc" path="res://misos-projekat/assets/fonts/Quicksand/static/Quicksand-Bold.ttf" id="8_1vagy"]
-[ext_resource type="PackedScene" uid="uid://5df0b4j67vw0" path="res://misos-projekat/Scenes/Arithmetic/arithmetic_number_line.tscn" id="9_kk0bk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8gwj"]
 bg_color = Color(0.4392157, 0.60784316, 0.81960785, 1)
@@ -265,9 +264,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3754d")
 [node name="ArithmeticCodingVisualizer" type="Control" parent="GUI/HBoxContainer/InputAndVisual/Board" unique_id=1424743697 groups=["ACV"]]
 layout_mode = 2
 script = ExtResource("3_dyxma")
-
-[node name="ArithmeticNumberLine" parent="GUI/HBoxContainer/InputAndVisual/Board/ArithmeticCodingVisualizer" unique_id=577717157 instance=ExtResource("9_kk0bk")]
-position = Vector2(107, 80)
 
 [node name="InputAnalysisTimer" type="Timer" parent="." unique_id=1605224814]
 one_shot = true

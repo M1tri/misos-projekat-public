@@ -137,6 +137,9 @@ func reset():
 	input_text = ""
 	text_count_label.text = "0/12"
 	
+	codes.clear()
+	code_pos = 0
+	
 	coded.reset()
 	decoded.reset()
 

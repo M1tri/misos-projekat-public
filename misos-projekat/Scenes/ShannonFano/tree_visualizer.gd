@@ -303,10 +303,9 @@ func calculate_shannon_tree(message : String) -> ShannonTreeNode:
 			return s1.frequency > s2.frequency
 			)
 	
-	step_texts.append(StepText.new("", "", "", 0, 0)) # dummy jer sam zeznuo funkcije
+	step_texts.append(StepText.new("", "", "", 0, 0))
 	var root : ShannonTreeNode = shannon_fanno(symbols)
 	shannonTreeRoot = root
-	move_tree(0, 25)
 	return root
 
 func shannon_fanno(symbols : Array[ShannonSymbol]) -> ShannonTreeNode:
@@ -355,11 +354,6 @@ func shannon_fanno(symbols : Array[ShannonSymbol]) -> ShannonTreeNode:
 	
 	var node : ShannonTreeNode = shannon_tree_node_scene.instantiate()
 	node.text = text
-	
-	#var step_text : String = str(step_texts.size()+1) + ": "
-#	step_text += arr_to_str(symbols) + " → "
-#	step_text += arr_to_str(left) + " [[color=red]" + str(arr_sum(left)) + "[/color]]"
-#	step_text += " | " + arr_to_str(right) + " [[color=red]" + str(arr_sum(right)) + "[/color]]"
 	
 	var step_text : StepText = StepText.new(
 		arr_to_str(symbols),

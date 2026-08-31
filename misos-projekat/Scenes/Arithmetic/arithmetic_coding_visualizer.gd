@@ -44,6 +44,14 @@ func reset():
 	for n in other_lines:
 		n.queue_free()
 	other_lines.clear()
+	
+	symbol_percentages.clear()
+	symbols.clear()
+	points.clear()
+	
+	message = ""
+	messsage_pos = -1
+	decompression_step_count = -1
 
 func calculate_numberLine_spacing(total_lines : int):
 	var total_space : float = (size.y - TOP_PADDING)
@@ -102,7 +110,13 @@ func next_coding_step():
 	messsage_pos += 1
 
 func beggin_decompression():
-	reset()
+	for n in number_lines:
+		n.queue_free()
+	number_lines.clear()
+	
+	for n in other_lines:
+		n.queue_free()
+	other_lines.clear()
 	
 	decompression_step_count = 0
 	
@@ -296,7 +310,6 @@ func get_points(start : float, end : float, symbol_percentages) -> Array[float]:
 	var index : int = 1
 	for s in symbol_percentages:
 		points.append(points[index-1] + (end-start) * symbol_percentages[s])
-		#print(s + " : " + str(points[index]))
 		index += 1
 	
 	return points

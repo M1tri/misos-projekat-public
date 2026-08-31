@@ -55,21 +55,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5shiy"]
-bg_color = Color(0.15294118, 0.29803923, 0.2627451, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.4, 0.25882354, 0.15686275, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4oyw"]
-bg_color = Color(0.15294118, 0.29803923, 0.2627451, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxa2o"]
 bg_color = Color(0.5803922, 0.43137255, 0.2901961, 1)
 corner_radius_top_left = 10
@@ -90,6 +75,21 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 16
 shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5shiy"]
+bg_color = Color(0.15294118, 0.29803923, 0.2627451, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.4, 0.25882354, 0.15686275, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4oyw"]
+bg_color = Color(0.15294118, 0.29803923, 0.2627451, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5gj0"]
 bg_color = Color(1, 1, 1, 1)
@@ -129,6 +129,7 @@ layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 35
 
 [node name="Input" type="HBoxContainer" parent="GUI/HBoxContainer/InputAndCounting/InputMargin" unique_id=877804988]
 layout_mode = 2
@@ -169,48 +170,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6rier")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekukc")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_ihs1b")
 text = "Pokreni ▶︎"
-
-[node name="InputDisplayMargin" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting" unique_id=1946864348]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 25
-
-[node name="InputDisplay" type="RichTextLabel" parent="GUI/HBoxContainer/InputAndCounting/InputDisplayMargin" unique_id=480259465 groups=["InputDisplay"]]
-clip_contents = false
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_g5gj0")
-theme_override_font_sizes/normal_font_size = 42
-theme_override_styles/normal = SubResource("StyleBoxFlat_5shiy")
-bbcode_enabled = true
-text = "a"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-visible_characters = 0
-visible_ratio = 0.0
-script = ExtResource("2_k7tgj")
-
-[node name="Eraser" type="Sprite2D" parent="GUI/HBoxContainer/InputAndCounting/InputDisplayMargin/InputDisplay" unique_id=1715713805]
-z_index = 1
-texture_filter = 1
-position = Vector2(510, 31)
-scale = Vector2(0.875, 0.8750005)
-texture = ExtResource("5_vi1wt")
-script = ExtResource("6_b66tm")
-
-[node name="EraserPanel" type="MarginContainer" parent="GUI/HBoxContainer/InputAndCounting/InputDisplayMargin/InputDisplay" unique_id=796530236]
-layout_mode = 0
-offset_right = 550.0
-offset_bottom = 63.0
-theme_override_constants/margin_left = 487
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Panel" type="Panel" parent="GUI/HBoxContainer/InputAndCounting/InputDisplayMargin/InputDisplay/EraserPanel" unique_id=395153997]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_a4oyw")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/HBoxContainer/InputAndCounting" unique_id=2000683461]
 layout_mode = 2
@@ -266,11 +225,53 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
 
+[node name="InputDisplayMargin" type="MarginContainer" parent="GUI/HBoxContainer/Tree" unique_id=1946864348]
+layout_mode = 2
+theme_override_constants/margin_left = 62
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 62
+theme_override_constants/margin_bottom = 25
+
+[node name="InputDisplay" type="RichTextLabel" parent="GUI/HBoxContainer/Tree/InputDisplayMargin" unique_id=480259465 groups=["InputDisplay"]]
+clip_contents = false
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_g5gj0")
+theme_override_font_sizes/normal_font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_5shiy")
+bbcode_enabled = true
+text = "a"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+script = ExtResource("2_k7tgj")
+
+[node name="Eraser" type="Sprite2D" parent="GUI/HBoxContainer/Tree/InputDisplayMargin/InputDisplay" unique_id=1715713805]
+z_index = 1
+texture_filter = 1
+position = Vector2(1184.0001, 31)
+scale = Vector2(0.8437493, 0.9375003)
+texture = ExtResource("5_vi1wt")
+script = ExtResource("6_b66tm")
+
+[node name="EraserPanel" type="MarginContainer" parent="GUI/HBoxContainer/Tree/InputDisplayMargin/InputDisplay" unique_id=796530236]
+layout_mode = 0
+offset_right = 1216.0
+offset_bottom = 63.0
+theme_override_constants/margin_left = 1156
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="GUI/HBoxContainer/Tree/InputDisplayMargin/InputDisplay/EraserPanel" unique_id=395153997]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a4oyw")
+
 [node name="MarginContainer" type="MarginContainer" parent="GUI/HBoxContainer/Tree" unique_id=788244621]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 72
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 10
 
@@ -331,14 +332,5 @@ script = ExtResource("13_a4oyw")
 [node name="InputAnalysisTimer" type="Timer" parent="." unique_id=1366409880]
 one_shot = true
 
-[node name="TreeTimer" type="Timer" parent="." unique_id=1112265044]
-wait_time = 2.0
-one_shot = true
-
-[node name="CodingTimer" type="Timer" parent="." unique_id=1590945079]
-one_shot = true
-
 [connection signal="pressed" from="GUI/HBoxContainer/InputAndCounting/InputMargin/Input/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="InputAnalysisTimer" to="." method="_on_input_analysis_timer_timeout"]
-[connection signal="timeout" from="TreeTimer" to="." method="_on_tree_timer_timeout"]
-[connection signal="timeout" from="CodingTimer" to="." method="_on_coding_timer_timeout"]

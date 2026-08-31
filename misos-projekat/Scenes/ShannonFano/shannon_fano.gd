@@ -17,9 +17,7 @@ var input_text : String = ""
 var inputPos : int = -1
 
 @onready var inputAnalysisTimer : Timer = $InputAnalysisTimer
-@onready var treeTimer : Timer = $TreeTimer
 @onready var start_button : Button = $GUI/HBoxContainer/InputAndCounting/InputMargin/Input/StartButton
-@onready var codingTimer : Timer = $CodingTimer
 
 @onready var coded_label : RicherLabel = $GUI/HBoxContainer/Tree/MarginContainer/VBoxContainer/Coded/VBoxContainer/Coded
 @onready var decoded_label : RicherLabel = $GUI/HBoxContainer/Tree/MarginContainer/VBoxContainer/Coded/VBoxContainer/Decoded
